@@ -1,0 +1,15 @@
+version: "3"
+services:
+  pg_master:
+    build:
+      ./master
+    environment:
+      - POSTGRES_USER=surbhit
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=testdb
+      - PG_REPLICATION_USER=rep_user
+      - PG_REPLICATION_PASSWORD=1234
+    networks:
+      default:
+        aliases:
+          - pg_cluster
