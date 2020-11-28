@@ -24,9 +24,10 @@ standby_mode = on
 recovery_target_timeline = 'latest'
 primary_conninfo = 'host=${PG_MASTER_HOST} port=${PG_MASTER_PORT:-5432} user=${PG_REPLICATION_USER} password=${PG_REPLICATION_PASSWORD}'
 restore_command = 'cp /var/lib/postgresql/archivedir/%f %p'
+trigger_file = '/tmp/pg_ctl_promote'
 EOF
 
-  echo "${PGDATA}/recovery.conf created"
+  gosu postgres mkdir -p /var/lib/postgresql/archivedir
 
   chown postgres. "${PGDATA}" -R
 
