@@ -13,3 +13,20 @@ services:
       default:
         aliases:
           - pg_cluster
+
+  pg_replica:
+    build:
+      ./replica
+    depends_on:
+      - pg_master
+    environment:
+      - POSTGRES_USER=surbhit
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=testdb
+      - PG_REPLICATION_USER=rep_user
+      - PG_REPLICATION_PASSWORD=1234
+      - PG_MASTER_HOST=pg_master
+    networks:
+      default:
+        aliases:
+          - pg_cluster
